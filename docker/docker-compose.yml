@@ -64,7 +64,7 @@ services:
       DATABASE_PASSWORD: password
       DATABASE_NAME: dawarich_development
       MIN_MINUTES_SPENT_IN_CITY: 60
-      APPLICATION_HOSTS: localhost
+      APPLICATION_HOSTS: localhost,dawarich-app.tail394bf.ts.net
       TIME_ZONE: Europe/London
       APPLICATION_PROTOCOL: http
       PROMETHEUS_EXPORTER_ENABLED: "false"
@@ -95,6 +95,10 @@ services:
         limits:
           cpus: '0.50'    # Limit CPU usage to 50% of one core
           memory: '4G'    # Limit memory usage to 4GB
+    labels:
+      tsdproxy.enable: true
+      tsdproxy.tlsvalidate: false
+
   dawarich_sidekiq:
     image: freikin/dawarich:latest
     container_name: dawarich_sidekiq
@@ -116,7 +120,7 @@ services:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: password
       DATABASE_NAME: dawarich_development
-      APPLICATION_HOSTS: localhost
+      APPLICATION_HOSTS: localhost,dawarich-app.tail394bf.ts.net
       BACKGROUND_PROCESSING_CONCURRENCY: 10
       APPLICATION_PROTOCOL: http
       PROMETHEUS_EXPORTER_ENABLED: "false"
